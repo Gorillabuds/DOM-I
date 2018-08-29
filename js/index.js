@@ -40,3 +40,36 @@ const siteContent = {
 // Example: Update the img src for the logo
 let logo = document.getElementById("logo-img");
 logo.setAttribute('src', siteContent["nav"]["img-src"])
+
+let navBar = document.querySelectorAll(".container header nav a");
+  navBar.forEach((item, index)=>{
+    item.innerHTML=siteContent["nav"][`nav-item-${index+1}`];
+  });
+let cta = document.querySelector(".cta .cta-text h1");
+  cta.innerHTML=siteContent["cta"]["h1"];
+
+  document.querySelector(".cta .cta-text button").innerHTML=siteContent["cta"]["button"];
+
+  document.querySelector("#cta-img").setAttribute("src", siteContent["cta"]["img-src"]);
+//creating a nodelist of nodes of everything in "main content"
+  let main = document.querySelectorAll(".main-content .text-content h4, .main-content .text-content p");
+ //creating an array of the content for "main-content"
+  let content = Object.entries(siteContent["main-content"]).filter(item => item[0].includes("h4") || item[0].includes("content")).map(item => item[1]);
+// assigning content where it belongs using forEach and index
+  main.forEach((item, index) => item.innerHTML = content[index] );
+   
+  document.querySelector("#middle-img").setAttribute("src", siteContent["main-content"][["middle-img-src"]]);
+
+let contact=document.querySelectorAll(".contact h4, .contact p");
+let contactContent=Object.values(sitecontent["contact"]);
+  contact.forEach((item,index)=>item.innerHTML=contactContent[index]);
+//I cant figure out why my footer is not going in
+  document.querySelector("footer p").innerHTML = 
+          siteContent["footer"]["copyright"];
+
+let moreNav = document.createElement("a");
+    moreNav.setAttribute("href","#");
+    moreNav.innerHTML="Appended Navigation!";
+
+document.querySelector(".container header nav").append(moreNav);
+// i do not think that my appended navigation is working properly either
